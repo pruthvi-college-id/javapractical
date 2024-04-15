@@ -1,12 +1,15 @@
-class SY2022bit024 {
+class Less_50 {
     public static void main(String[] args) {
-        String[] enrollnumber = { "2022bit024", "2023bcs023", "2029bit023", "2000bch399", "2024bme501" };
-        SY2022bit024 b = new SY2022bit024();
-        int count = b.getValidRegistrationsCount(enrollnumber);
+        String[] enrollnumber = { "2022bit024", "2023bcs023", "2029bit023", "2000bch399", "2024bme300" };
+        Less_50 b = new Less_50();
+       	long startTime=System.nanoTime();
+        int count = b.validReg(enrollnumber);
+        long endTime = System.nanoTime();
         System.out.println(count);
+        System.out.println(startTime-endTime);
     }
 
-    public int getValidRegistrationsCount(String[] registrations) {
+    public int validReg(String[] registrations) {
         boolean isSatisfy = false;
         int count = 0;
         if (registrations == null) {
@@ -16,8 +19,7 @@ class SY2022bit024 {
             isSatisfy = true;
             if (registrations[i].length() != 10) {
                 continue;
-            } 
-            else {
+            } else {
                 for (int j = 0; j < registrations[i].length()-2; j++) {
                     if (j < 4 || (j > 6 && j < registrations[i].length())) {
                         char charAtInd = registrations[i].charAt(j);
@@ -43,25 +45,28 @@ class SY2022bit024 {
                             break;
                         }
                     }
-                    if(j>=7){
+    
+                    if (j >= 7) {
                         Character a = registrations[i].charAt(7);
                         int p = a.getNumericValue(a);
-                        if(p>=0 && p<2)
-                        {
-                            System.out.println(i + " is regular student");
-                            isSatisfy =true;
+                        if (p==0) {
+                            System.out.println(i + "is regular student");
+                            isSatisfy = true;
+                            break;
+                        } else {
+                            System.out.println(i + " is not student");
+                            isSatisfy = false;
                             break;
                         }
-                        else {
-                            System.out.println(i +" is not student");
-                            continue;
-                        }
                     }
-                if (isSatisfy == true) {
-                    count++;
-                }}
+
+                }
             }
+            if (isSatisfy == true) {
+                count++;
+            }
+
         }
         return count;
-}
+    }
 }
